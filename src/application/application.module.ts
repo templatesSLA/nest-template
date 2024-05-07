@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { CustomerService } from './use-cases/customer/customer.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserRepository } from '../domain/repositories/user.repository';
+import { DomainModule } from '../domain/domain.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserRepository])],
+  imports: [DomainModule],
   providers: [CustomerService],
   exports: [CustomerService],
 })

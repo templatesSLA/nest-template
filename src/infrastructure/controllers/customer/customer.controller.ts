@@ -10,7 +10,7 @@ import { CustomerService } from '../../../application/use-cases/customer/custome
 export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}
 
-  @Post()
+  @Post('create')
   @ApiOperation({ summary: 'Create user' })
   @ApiResponse({
     status: 201,
