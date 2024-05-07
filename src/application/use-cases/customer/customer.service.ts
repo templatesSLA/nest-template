@@ -1,26 +1,19 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
-import { User } from '../../../domain/entities/user.entity';
 import { CreateUserDto } from '../../../domain/dto/user.dto';
+import { UserRepository } from '../../../domain/repositories/user.repository';
 
 @Injectable()
 export class CustomerService {
   constructor(
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    @InjectRepository(UserRepository)
+    private userRepository: UserRepository,
   ) {}
 
-  async createUser(createUserDto: CreateUserDto): Promise<User> {
+  async createUser(createUserDto: CreateUserDto) {
     try {
-      const user = new User();
-      user.name = createUserDto.name;
-      user.lastName = createUserDto.lastName;
-      user.email = createUserDto.email;
-      user.age = createUserDto.age;
-
-      return await this.usersRepository.save(user);
+      return await this.userRepository.createUser(createUserDto);
     } catch (error) {
       throw new BadRequestException('Invalid input.');
     }
