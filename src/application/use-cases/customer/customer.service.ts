@@ -11,7 +11,6 @@ export class CustomerService {
     try {
       return await this.userRepository.createUser(createUserDto);
     } catch (error) {
-      console.log({ error });
       throw new BadRequestException('Invalid input.');
     }
   }
